@@ -1,0 +1,28 @@
+
+<div  style="padding:150px;">
+
+<h1>CL1</h1>
+
+<!-- displays machines using gridster module -->
+<gridster [options]="options">
+    <div class="options-header" *ngIf="options.draggable">
+        <div *ngIf="cl1Systems">
+            <div *ngFor="let cl1System of cl1Systems['data']">
+                <!-- sets gridster-item attributes like x, y, rows, cols ... -->
+                <gridster-item [item]="{x: cl1System.X*1, y: cl1System.Y*1, rows: 1, cols: 1, id:cl1System.host_name}"
+                    style="font-size: 14px;">
+                    <img *ngIf="cl1System.status==='1'" src="assets/images/occupied.gif" height="40" width="40"
+                        matTooltip="{{cl1System.host_name}}&#13;{{cl1System.position}} (In-Use)" matTooltipClass="test">
+                    <!-- matTooltip is to display details if we hover -->
+                    <img *ngIf="cl1System.status==='0'" src="assets/images/free.gif" height="40" width="40"
+                        matTooltip="{{cl1System.host_name}}&#13;{{cl1System.position}} (Available)"
+                        matTooltipClass="test"><br>
+                    {{cl1System.position}}
+                </gridster-item>
+            </div>
+        </div>
+    </div>
+</gridster>
+
+
+</div>

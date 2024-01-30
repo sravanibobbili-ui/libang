@@ -1,0 +1,57 @@
+<div  style="padding:120px;">
+
+<h1>ER</h1>
+<gridster [options]="options">
+  <div *ngIf="erSystems">
+    <div class="options-header" *ngIf="options.draggable">
+      <div *ngFor="let erSystem of erSystems['data']">
+        <!-- sets gridster-item attributes like x, y, rows, cols ... -->
+         <gridster-item [item]="{x: erSystem.X*1, y: erSystem.Y*1, rows: 2, cols: 2, id:erSystem.host_name}"
+          style="font-size: 14px;"> 
+          <!-- matTooltip is to display details if we hover -->
+          <img *ngIf="erSystem.status==='0'" src="assets/images/free.gif" height="40" width="40"
+            matTooltip="{{erSystem.host_name}}&#13;{{erSystem.position}} (Available)" matTooltipClass="test">
+          <img *ngIf="erSystem.status==='1'" src="assets/images/occupied.gif" height="40" width="40"
+            matTooltip="{{erSystem.host_name}}&#13;{{erSystem.position}} (In-Use)" matTooltipClass="test">
+          <img *ngIf="erSystem.status==='2'" src="assets/images/warning.gif" height="40" width="40"
+            matTooltip="{{erSystem.host_name}}&#13;{{erSystem.position}} (Available)" matTooltipClass="test"><br>
+          {{erSystem.position}}
+        </gridster-item>
+      </div>
+    </div>
+  </div>
+</gridster>
+
+</div>
+
+<!-- extra code for reference>
+  er works!
+</p>
+<mat-grid-list cols="15" rowHeight="1:1">
+    <mat-grid-tile *ngFor="let erSystem of erSystems.data"  >
+      <div mwlDraggable dropData={{erSystem.status}} dragActiveClass="drag-active" [dragSnapGrid]="{x: 50, y: 50}">
+        <figure >
+        <img *ngIf="erSystem.status==='1'" src ="assets/images/occupied.gif" height="50" width="50" >
+        <img *ngIf="erSystem.status==='0'" src ="assets/images/free.gif" height="50" width="50" >
+        <figcaption>{{erSystem.position}}</figcaption>
+      </figure>
+      </div>
+    </mat-grid-tile>
+  </mat-grid-list>
+
+  <mat-grid-list cols="15" rowHeight="1:1" >
+  <mat-grid-tile *ngFor="let erSystem of erSystems.data"
+    mwlDroppable
+    (drop)="onDrop($event)"
+    dragOverClass="drop-over-active">
+    <span [hidden]="droppedData">Drop here</span>
+    <span [hidden]="!droppedData">
+        <figure >
+      <img *ngIf="droppedData==='1'" src ="assets/images/occupied.gif" height="40" width="40" >
+      <img *ngIf="droppedData==='0'" src ="assets/images/free.gif" height="40" width="40" >
+      <figcaption>{{erSystem.position}}</figcaption>
+      </figure>
+     
+    </span>
+  </mat-grid-tile>
+  </mat-grid-list> -->

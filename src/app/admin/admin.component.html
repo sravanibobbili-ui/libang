@@ -1,0 +1,149 @@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+<div  style="padding:120px;">
+
+<h1>ER</h1>
+<!-- displays er machines using gridster module -->
+<gridster [options]="optionsER">
+    <div class="optionsER-header" *ngIf="optionsER.draggable"
+        style="position: absolute; top: 0; bottom: 0; left: 0; right: 0;">
+        <!-- pan-zoom will not work without the above div tag with style attributes [config]="panZoomConfigER" -->
+        <pan-zoom [config]="panZoomConfigER">
+            <div *ngIf="erSystems">
+                <div *ngFor="let erSystem of erSystems['data']">
+                    <!-- sets gridster-item attributes like x, y, rows, cols ... -->
+                    <gridster-item [item]="{x: erSystem.X*1, y: erSystem.Y*1, rows: 2, cols: 2, id:erSystem.host_name}"
+                        style="font-size: 14px;" (click) = "makelog(erSystem)">
+                        <!-- matTooltip is to display details if we hover -->
+                        <img mat-card-image *ngIf="erSystem.status==='0'" src="assets/images/free.gif" height="41"
+                            width="41" matTooltip="{{erSystem.host_name}}&#13;{{erSystem.ip_address}}"
+                            [matTooltipDisabled]="!disabledEditLayout" matTooltipClass="test"
+                            (click)="details(erSystem)">
+                        <img mat-card-image *ngIf="erSystem.status==='1'" src="assets/images/occupied.gif" height="41"
+                            width="41" matTooltip="{{erSystem.host_name}}&#13;{{erSystem.ip_address}}"
+                            [matTooltipDisabled]="!disabledEditLayout" matTooltipClass="test"
+                            (click)="details(erSystem)">
+                        <img mat-card-image *ngIf="erSystem.status==='2'" src="assets/images/warning.gif" height="41"
+                            width="41" matTooltip="{{erSystem.host_name}}&#13;{{erSystem.ip_address}}"
+                            [matTooltipDisabled]="!disabledEditLayout" matTooltipClass="test"
+                            (click)="details(erSystem)">
+                        {{erSystem.position}}
+                    </gridster-item>
+                </div>
+            </div>
+        </pan-zoom>
+    </div>
+</gridster>
+
+
+
+
+
+
+
+
+
+<h1>CL1</h1>
+<!-- displays c11 machines using gridster module -->
+<gridster [options]="optionsCL1">
+    <div class="optionsCL1-header" *ngIf="optionsCL1.draggable"
+        style="position: absolute; top: 0; bottom: 0; left: 0; right: 0;">
+        <!-- pan-zoom will not work without the above div tag with style attributes [config]="panZoomConfigCL1"-->
+        
+        <pan-zoom [config]="panZoomConfigCL1">
+            <div *ngIf="cl1Systems">
+                <div *ngFor="let cl1System of cl1Systems['data']">
+                    <!-- sets gridster-item attributes like x, y, rows, cols ... -->
+                    <gridster-item [item]="{x: cl1System.X*1, y: cl1System.Y*1, rows: 1, cols: 1, id:cl1System.host_name}"
+                        style="font-size: 14px;" (click) = "makelog(cl1System)">
+                        <img mat-card-image *ngIf="cl1System.status==='1'" src="assets/images/occupied.gif" height="41"
+                            width="40" matTooltip="{{cl1System.host_name}}&#13;{{cl1System.ip_address}}"
+                            [matTooltipDisabled]="!disabledEditLayout" matTooltipClass="test"
+                            (click)="details(cl1System)">
+                        <!-- matTooltip is to display details if we hover -->
+                        <img mat-card-image *ngIf="cl1System.status==='0'" src="assets/images/free.gif" height="41"
+                            (click)="details(cl1System)">
+                        <img mat-card-image *ngIf="cl1System.status==='2'" src="assets/images/warning.gif" height="41"
+                            width="41" matTooltip="{{cl1System.host_name}}&#13;{{cl1System.ip_address}}"
+                            [matTooltipDisabled]="!disabledEditLayout" matTooltipClass="test"
+                            (click)="details(cl1System)">   
+                        {{cl1System.position}}
+                    </gridster-item>
+                </div>
+            </div>
+        </pan-zoom>
+    </div>
+</gridster>
+
+
+
+
+
+</div>
+
+
+
+
+
+<!-- Edit Zoom and Edit Layout div tag -->
+<div
+    style="position: fixed; top: 100px; height: 220px; left: 39px; font-size: 16px; background-color: rgb(250, 250, 250); border-radius:10px; width: 220px;">
+    <!-- <mat-drawer-container class="example-container" autosize>
+        <mat-drawer #drawer class="example-sidenav" mode="side">
+          <p>Auto-resizing sidenav</p>
+          <p *ngIf="showFiller">Lorem, ipsum dolor sit amet consectetur.</p>
+          <button (click)="showFiller = !showFiller" mat-raised-button>
+            Toggle extra text
+          </button>
+        </mat-drawer>
+      
+        <div class="example-sidenav-content">
+          <button type="button" mat-button (click)="drawer.toggle()">
+            Toggle sidenav
+          </button>
+        </div>
+      
+      </mat-drawer-container> -->
+    <mat-checkbox (change)="editZoom($event)" style="margin-left:20px">
+        Edit Zoom
+    </mat-checkbox>
+    <button mat-icon-button [disabled]="disabledEditZoom" (click)="zoomIn()" color="accent" style="margin:10px">
+        <mat-icon>zoom_in</mat-icon>
+        <!-- mat-icon displays zoom_in and zoom_out icons -->
+    </button>
+    <button mat-icon-button [disabled]="disabledEditZoom" (click)="zoomOut()" color="accent">
+        <mat-icon>zoom_out</mat-icon>
+    </button>
+    <br>
+    <!-- Edit Layout sets draggable to enabled in gridster options -->
+    <mat-checkbox (change)="changeCheck($event)" [(ngModel)]="optionsER.draggable.enabled"
+        [(ngModel)]="optionsCL1.draggable.enabled" [(ngModel)]="optionsCL2.draggable.enabled"
+        (ngModelChange)="changedOptions()" style="margin-left:20px">
+        Edit Layout
+    </mat-checkbox>
+    <button mat-raised-button color="accent" [disabled]="disabledEditLayout" (click)="gridsterUpdateLayoutDatabase()"
+        style="margin-left:20px ; margin-bottom:6px">Save</button>
+     <!-- add the ability to put machines "out of service" -->
+     <mat-checkbox (change)="editAsset($event)" 
+      style="margin-left:20px ; margin-bottom:10px ">
+     Edit Asset
+ </mat-checkbox>
+ <button mat-raised-button color="accent" [disabled]="disabledEditAssets" (click)="statusUpdateDatabase()"
+     style="margin-left:29px">Save</button>
+
+<!-- <mat-slide-toggle [(ngModel)]="isChecked">Slide Toggle Checked: {{isChecked}}</mat-slide-toggle> -->
+<!-- <mat-slide-toggle name="type1" [(ngModel)]="type1" (change)='onChange($event, 1)' style="margin-left:30px ; margin-bottom:6px " >ER</mat-slide-toggle>
+<mat-slide-toggle name="type2" [(ngModel)]="type2" (change)='onChange($event, 2)' style="margin-left:30px" >CL1</mat-slide-toggle>
+<mat-slide-toggle name="type2" [(ngModel)]="type2" (change)='onChange($event, 2)' style="margin-left:30px" >CL2</mat-slide-toggle> -->
+<!-- [(ngModel)]="isCheckedER" -->
+<mat-slide-toggle  [checked]="isCheckedER" (change)='changestatus()'  > Out of Service ER</mat-slide-toggle>
+<mat-slide-toggle [checked]="isCheckedCL1" [disabled]="disabled" (change)='changestatuscl1()'  > Out of Service CL1</mat-slide-toggle>
+<!--<mat-slide-toggle [checked]="isCheckedCL2" [disabled]="disabled" (change)='changestatuscl2()' > Out of Service CL2</mat-slide-toggle> -->
+
+</div>
+
+
+
+
+
+

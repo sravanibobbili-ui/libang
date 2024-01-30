@@ -1,0 +1,36 @@
+h1{
+  text-align: center;
+}
+gridster {
+    left: -90px;
+    float: left;
+    //  padding-left: 10px;
+    width: 1200px;
+    height: 700px;
+    // overflow: scroll;
+    // border-top: 1px solid black;
+    background: white;
+  }
+
+  // gridster-item {
+  //   width: 5vw;
+  //   height: 5vh;
+
+  // }
+gridster-item {
+    margin: 5px;
+    box-sizing: border-box;
+    z-index: 1;
+    position: absolute;
+    overflow: hidden;
+    transition: .3s;
+    display: none;
+    background: #fff;
+    -webkit-user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
+    user-select: text;
+}
+.test {
+  white-space: pre-line;
+}

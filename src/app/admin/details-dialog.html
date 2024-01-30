@@ -1,0 +1,12 @@
+<div mat-dialog-content>
+  <!-- displays details of machine in list form -->
+  <ul>
+    <li>{{data.location}}</li>
+    <li>{{data.position}}</li>
+    <li>{{data.ip}}</li>
+    <li>{{data.host | uppercase}}</li>
+  </ul>
+</div>
+<div mat-dialog-actions style="justify-content: center">
+  <button mat-button (click)="onNoClick()">OK</button>
+</div>

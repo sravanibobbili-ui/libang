@@ -1,0 +1,20 @@
+<h1>CL2</h1>
+<gridster [options]="options">
+    <div class="options-header" *ngIf="options.draggable">
+        <div *ngIf="cl2Systems">
+            <div *ngFor="let cl2System of cl2Systems['data']">
+                <!-- sets gridster-item attributes like x, y, rows, cols ... -->
+                <gridster-item [item]="{x: cl2System.X*1, y: cl2System.Y*1, rows: 1, cols: 1, id:cl2System.host_name}"
+                    style="font-size: 14px;">
+                    <img *ngIf="cl2System.status==='1'" src="assets/images/occupied.gif" height="40" width="40"
+                        matTooltip="{{cl2System.host_name}}&#13;{{cl2System.position}} (In-Use)" matTooltipClass="test">
+                    <!-- matTooltip is to display details if we hover -->
+                    <img *ngIf="cl2System.status==='0'" src="assets/images/free.gif" height="40" width="40"
+                        matTooltip="{{cl2System.host_name}}&#13;{{cl2System.position}} (Available)"
+                        matTooltipClass="test"><br>
+                    {{cl2System.position}}
+                </gridster-item>
+            </div>
+        </div>
+    </div>
+</gridster>

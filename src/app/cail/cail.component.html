@@ -1,0 +1,331 @@
+<div fxLayout="row wrap" fxLayoutAlign="center center" style=" margin-left: 30px; ">
+  <h1 align="left" style="position:relative;left: 1px;color: #009900">CAiL</h1>
+  <h3 align="left" style="position:relative;left: 1px">(Computer Availability in Library)</h3>
+  <p style="position: relative; left: 1px">COMPUTER LAB 1: <strong style="color: #009900">{{this.cl1Count-1}}</strong>
+   &nbsp;&nbsp;&nbsp; ER:
+  <strong style="color: #009900">{{this.erCount}}</strong> &nbsp;&nbsp;&nbsp; Refresh rate: 15 seconds.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <div class="totalcontent" fxFlex="90%" fxLayoutAlign="center center" >
+
+
+
+    <div class="leftcontent border shadow-lg"  style="float:left;"  >
+
+
+
+
+      <ul class="nav nav-tabs" id="myTab" role="tablist" >
+        <li  (click)="changeto(true)" class="nav-item" role="presentation">
+          <button  class="nav-link active border-top-0 rounded-0" id="lab1-tab" data-bs-toggle="tab" data-bs-target="#lab1-tab-pane" type="button" role="tab" aria-controls="lab1-tab-pane" aria-selected="true"
+          style="height: 60px; font-weight: bold;">
+         <span> Computer Lab 1 </span>
+        </button>
+        </li>
+        <li  (click)="changeto(false)" class="nav-item" role="presentation">
+          <button  class="nav-link  border-top-0 rounded-0" id="er-tab" data-bs-toggle="tab" data-bs-target="#er-tab-pane" type="button" role="tab" aria-controls="er-tab-pane" aria-selected="false"
+          style="height: 60px; font-weight: bold;">
+           <span> Electronic Resources </span>
+        </button>
+        </li>
+      </ul>
+
+   
+
+      <div class="tab-content" id="myTabContent"
+      >
+
+
+
+        <div class="tab-pane fade show active" id="lab1-tab-pane" role="tabpanel" aria-labelledby="lab1-tab" tabindex="0"
+        > 
+          
+
+
+          <table class="border-0" style="position: relative; left: 1px;">
+            <tbody>
+              <tr>
+                <td align="center" height="5" align="middle" width="680" colspan="2">
+                  <div style="position: relative; height: 5px; width: 630px;">
+                  </div>
+                </td>
+              </tr>
+
+              
+              <tr>
+                <td align="center" height="450" width="325">
+                  <div style="position: relative; height: 450px; width: 325px; margin-top: 40px;">
+                    <h4></h4>
+                    <div *ngIf="cl1=='busy'" style="font-weight: bold; font-size: 18px; color: rgb(236, 2, 2)">
+                      Class in Session<br>{{cl1Time}}</div>
+                    <div *ngIf="cl1=='free'" style="font-weight: bold; font-size: 18px; color: rgb(17, 143, 17)">
+                      Lab is free until<br>{{cl1NextLab}}</div>
+                    <div style="position: absolute;top:120px; left: -30px">
+                      <!-- displays machines using gridster module -->
+                      <gridster [options]="optionsCL1">
+                        <div class="optionsCL1-header" *ngIf="optionsCL1.draggable">
+                          <div *ngIf="cl1Systems">
+                            <div *ngFor="let cl1System of cl1Systems['data']">
+                              <!-- sets gridster-item attributes like x, y, rows, cols ... -->
+                              <gridster-item
+                                [item]="{x: cl1System.X*1, y: cl1System.Y*1, rows: 1, cols: 1, id:cl1System.host_name}"
+                                style="font-size: 14px;">
+                                <div *ngIf="cl1System.status==='1'">
+                                  <img *ngIf="cl1System.position!=='PC01'" src="assets/images/occupied.gif" height="22"
+                                    width="22" matTooltip="{{cl1System.host_name}}&#13;{{cl1System.position}} (In-Use)"
+                                    matTooltipClass="test">
+                                </div>
+                                <!-- matTooltip is to display details if we hover -->
+                                <div *ngIf="cl1System.status==='0'">
+                                  <img *ngIf="cl1System.position!=='PC01'" src="assets/images/free.gif" height="22" width="22"
+                                    matTooltip="{{cl1System.host_name}}&#13;{{cl1System.position}} (Available)"
+                                    matTooltipClass="test">
+                                </div>
+                                <img *ngIf="cl1System.status==='2'" src="assets/images/warning.gif" height="22" width="22"
+                                  matTooltip="{{cl1System.host_name}}&#13;{{cl1System.position}} (Under maintenance)"
+                                  matTooltipClass="test">
+                                <img *ngIf="cl1System.position==='PC01'" src="assets/images/initial.gif" height="22" width="22"
+                                  matTooltip="{{cl1System.host_name}}&#13;{{cl1System.position}} (Instructor)"
+                                  matTooltipClass="test">
+                              </gridster-item>
+                            </div>
+                          </div>
+                        </div>
+                      </gridster>
+                      <!-- divider for CL1 -->
+                      <img src="assets/images/divider.gif"
+                        style="position: absolute; height: 1px; width: 21px; top: 27px; left: 120px;">
+                      <img src="assets/images/divider.gif"
+                        style="position: absolute; height: 1px; width: 63px; top: 48px; left: 102px;">
+                      <img src="assets/images/divider.gif"
+                        style="position: absolute; height: 1px; width: 63px; top: 95px; left: 102px;">
+                      <img src="assets/images/divider.gif"
+                        style="position: absolute; height: 1px; width: 63px; top: 140px; left: 102px;">
+                      <img src="assets/images/divider.gif"
+                        style="position: absolute; height: 1px; width: 63px; top: 186px; left: 102px;">
+        
+                      <img src="assets/images/divider.gif"
+                        style="position: absolute; height: 1px; width: 87px; top: 3px; left: 215px;">
+                      
+                      <img src="assets/images/divider.gif"
+                        style="position: absolute; height: 1px; width: 87px; top: 48px; left: 215px;">
+                      <img src="assets/images/divider.gif"
+                        style="position: absolute; height: 1px; width: 67px; top: 95px; left: 215px;">
+                      <img src="assets/images/divider.gif"
+                        style="position: absolute; height: 1px; width: 87px; top: 140px; left: 215px;">
+                      <img src="assets/images/divider.gif"
+                        style="position: absolute; height: 1px; width: 87px; top: 186px; left: 215px;">
+                      
+                      <div *ngIf="cl1=='busy'"
+                        style="position: absolute; text-align: center; left: 89px; top: 0px; width: 234px; height: 240px;  align-items: center; display: flex; justify-content: center; background-color: rgba(117, 115, 115, 0.5); z-index: 4;">
+                        <!-- <div class="line1"></div> -->
+                        <!-- <div class="line2"></div> -->
+                      </div>
+                    </div>
+                  </div>
+                </td>
+        
+        
+              </tr>
+            </tbody>
+          </table>
+
+      
+
+
+        </div>
+
+
+
+
+
+
+        <div class="tab-pane fade" id="er-tab-pane" role="tabpanel" aria-labelledby="er-tab" tabindex="0">
+          
+          
+          <table class="border-0" style="position: relative; left: 1px">
+
+            <tbody>
+              <tr>
+        
+                <td align="center" height="450" align="middle" width="680" colspan="2">
+                  <div style="position: relative; height: 450px; width: 630px; margin-top: 40px;">
+                    <h4></h4>
+                    <div style="position: relative; left: 80px;">
+                      <gridster [options]="optionsER">
+                        <div *ngIf="erSystems">
+                          <div class="optionsER-header" *ngIf="optionsER.draggable">
+                            <div *ngFor="let erSystem of erSystems['data']">
+                              <!-- sets gridster-item attributes like x, y, rows, cols ... -->
+                              <gridster-item
+                                [item]="{x: erSystem.X*1, y: erSystem.Y*1, rows: 2, cols: 2, id:erSystem.host_name}"
+                                style="font-size: 14px;">
+                                <img *ngIf="erSystem.status==='1'" src="assets/images/occupied.gif" height="22" width="22"
+                                  matTooltip="{{erSystem.host_name}}&#13;{{erSystem.position}} (In-Use)" matTooltipClass="test">
+                                <!-- matTooltip is to display details if we hover -->
+                                <img *ngIf="erSystem.status==='0'" src="assets/images/free.gif" height="22" width="22"
+                                  matTooltip="{{erSystem.host_name}}&#13;{{erSystem.position}} (Available)"
+                                  matTooltipClass="test">
+                                <img *ngIf="erSystem.status==='2'" src="assets/images/warning.gif" height="22" width="22"
+                                  matTooltip="{{erSystem.host_name}}&#13;{{erSystem.position}} (Under maintenance)"
+                                  matTooltipClass="test">
+                              </gridster-item>
+                            </div>
+                          </div>
+                        </div>
+                      </gridster>
+                      <!-- divider for ER -->
+                     <div>
+                      <img src="assets/images/divider.gif"
+                        style="position: absolute; height: 1px; width: 80px; top: 24px; left: 160px; " >
+                      <img src="assets/images/divider.gif"
+                        style="position: absolute; height: 1px; width: 80px; top: 25px; left: 361px;">
+                      <img src="assets/images/divider.gif"
+                        style="position: absolute; height: 1px; width: 27px; top: 25px; left: 287px; ">
+                      <img src="assets/images/divider.gif"
+                        style="position: absolute; height: 25px; width: 1px; top: 25px; left: 287px;" >
+                      <img src="assets/images/divider.gif"
+                        style="position: absolute; height: 1px; width: 27px; top: 50px; left: 287px;" >
+                      <img src="assets/images/divider.gif"
+                        style="position: absolute; height: 25px; width: 1px; top: 25px; left: 313px;" >
+                      <img src="assets/images/divider.gif"
+                        style="position: absolute; height: 180px; width: 1px; top: 99px; left: 217px;" >
+                      <img src="assets/images/divider.gif"
+                        style="position: absolute; height: 1px; width: 35px; top: 150px; left: 287px;" >
+                      <img src="assets/images/divider.gif"
+                        style="position: absolute; height: 1px; width: 150px; top: 167px; left: 287px;" >
+                      <img src="assets/images/divider.gif"
+                        style="position: absolute; height: 1px; width: 152px; top: 252px; left: 285px;" >
+                      <img src="assets/images/divider.gif"
+                        style="position: absolute; height: 17px; width: 1px; top: 76px; left: 467px;" >
+                      <img src="assets/images/divider.gif"
+                        style="position: absolute; height: 17px; width: 1px; top: 100px; left: 467px;" >
+                      <!---divider-->
+                      <img src="assets/images/divider.gif"
+                        style="position: absolute; height: 87px; width: 1px; top: 54px; left: 117px;">
+                      <img src="assets/images/divider.gif"
+                        style="position: absolute; height: 87px; width: 1px; top: 54px; left: 146px;">
+                      <img src="assets/images/divider.gif"
+                        style="position: absolute; height: 87px; width: 1px; top: 54px; left: 88px;">
+                      <img src="assets/images/divider.gif"
+                        style="position: absolute; height: 87px; width: 1px; top: 54px; left: 55px;">
+                      <img src="assets/images/divider.gif"
+                        style="position: absolute; height: 87px; width: 1px; top: 54px; left: 26px;">
+                      <img src="assets/images/divider.gif"
+                        style="position: absolute; height: 87px; width: 1px; top: 54px; left: -4px;">
+                      <img src="assets/images/divider.gif"
+                        style="position: absolute; height: 87px; width: 1px; top: 54px; left: -34px;">
+                    </div> 
+                      <div
+                        style="position: absolute; text-align: center; left: 472px; top: 47px; width: 59px;  border: 1px solid #000;">
+                        The Daily Read Cafe</div>
+                      <div
+                        style="position: absolute; text-align: center; font-size: 16px; transform: rotate(-90deg); left: -15px; top: 270px; width: 140px; height: 25px; border: 1px solid #000;">
+                        Ask Us Desk</div>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+
+
+
+              <tr>
+                <td align="center" height="5" width="325">
+                  <div style="position: relative; height: 5px; width: 325px;"> 
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+
+        </div>
+
+
+      </div>
+
+
+    </div>
+
+
+    
+    <div class="rightcontent  shadow-lg rounded" style="float:left;margin-left: 10px; padding-top: 40px; padding-left: 25px; width:500px; ">
+      <div style="margin-bottom: 25px;">
+        <img alt="" height="22" src="assets/images/free.gif" width="22" />: Computer available <br />
+        <img alt="" height="22" src="assets/images/occupied.gif" width="22" />: Computer in use <br />
+        <img alt="" height="22" src="assets/images/warning.gif" width="22" />: Under maintenance <br />
+        <img alt="" height="22" src="assets/images/initial.gif" width="22" />: Instructor Machine <br />
+      </div>
+
+      <div *ngIf="tog == true" >
+
+        <p><strong style="font-size:16px">WEEKLY SCHEDULE.</strong></p>
+
+
+        <p><strong style="font-size:16px">Computer Lab 1 - Rm. 109</strong></p>
+
+          <div *ngIf="cl1Schedule" style="font-size:15px;">
+            <div *ngFor="let cl1Sch of cl1Schedule['data']; let i = index">
+              <div *ngIf="i==0">
+                <span style="text-align:left; font-weight: bold; line-height:1.5em;">{{cl1Sch.dayOfWeek}}</span>
+                <span style=" font-weight: bold; margin-left:1em;">{{cl1Sch.startdateformatted}}</span><br/>
+              
+                <span style="text-align: left; line-height:1.5em;">{{cl1Sch.title}} </span>
+                <span  style="float:right; margin-left:1.5em;">{{cl1Sch.starttime}} - {{cl1Sch.endtime}}</span><br />
+              
+                <!--<div *ngIf="sch.location==='CL1'" style="text-align: end">
+                            {{sch.starttime}} - {{sch.endtime}}<br />
+                        </div> -->
+              </div>
+            
+              <div *ngIf="i!=0">
+                <div *ngIf="cl1Sch.dayOfWeek!=cl1Schedule['data'][i-1].dayOfWeek">
+                  <span style="text-align: start; font-weight: bold; line-height:1.5em;">{{cl1Sch.dayOfWeek}}</span>
+                
+                  <span style=" font-weight: bold; margin-left:1em;">{{cl1Sch.startdateformatted}}</span><br /> 
+              </div>
+                  <!-- <div *ngIf="sch.location==='CL1'" style="text-align: end"> -->
+                  <span style="text-align: start;  line-height:1.5em;">{{cl1Sch.title}}</span>
+                  
+                  <span style = " float:right; margin-left:1.5em;">{{cl1Sch.starttime}} - {{cl1Sch.endtime}}</span><br />
+              </div> 
+
+            </div>
+          </div>
+
+
+          <br> 
+          <p style=" float:left; font-size:16px;"    >* Schedules are subject to change without notice. 
+          </p>   
+     </div>
+
+
+      
+
+    </div>
+
+
+
+  </div>
+
+
+
+
+</div>

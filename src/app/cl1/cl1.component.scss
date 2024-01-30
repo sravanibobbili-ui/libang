@@ -1,0 +1,45 @@
+
+h1{
+  text-align: center;
+}
+gridster {
+    left: -130px;
+    float: left;
+    //  padding-left: 10px;
+    width: 1200px;
+    height: 700px;
+    // overflow: scroll;
+    // border-top: 1px solid black;
+    background: white;
+  }
+
+gridster-item {
+    margin: 5px;
+    box-sizing: border-box;
+    z-index: 1;
+    position: absolute;
+    overflow: hidden;
+    transition: .3s;
+    display: none;
+    background: #fff;
+    -webkit-user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
+    user-select: text;
+}
+
+mat-raised-button{
+  padding: 5px;
+}
+mat-slider {
+  width: 300px;
+}
+.mat-tooltip {
+  white-space: pre-line;
+}
+.ScrollStyle
+{
+    max-height: 500px;
+    max-width: 1000px;
+    // overflow-y: scroll;
+}

@@ -1,0 +1,47 @@
+h1{
+  padding-left: 475px;;
+  margin-block-start: 0.5em;
+  margin-block-end: 0.5em;
+}
+gridster {
+  // top: -35px;
+    left: -90px;
+    float: left;
+    //  padding-left: 10px;
+    width: 1200px;
+    height: 700px;
+    // overflow: scroll;
+    // border-top: 1px solid black;
+    background: white;
+  }
+
+gridster-item {
+    margin: 5px;
+    box-sizing: border-box;
+    z-index: 1;
+    position: absolute;
+    overflow: hidden;
+    transition: .3s;
+    display: none;
+    background: #fff;
+    -webkit-user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
+    user-select: text;
+}
+.example-container {
+  width: 500px;
+  height: 300px;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+}
+
+.example-sidenav-content {
+  display: flex;
+  height: 100%;
+  align-items: left;
+  justify-content: left;
+}
+
+.example-sidenav {
+  padding: 20px;
+}
